@@ -28,7 +28,10 @@
 	$.waterfall.defaults = {
 		parentElementCls: '',
 		itemElementCls: '',
-		spacing: '10'
+		spacingx: 10,
+		spacingy: 10,
+		xL: 0,
+		xR: 0,
 	};
 
 	$.waterfall.prototype = {
@@ -37,10 +40,38 @@
 
 			// work here
 
-			console.log(opts);
+			this.start(opts);
 
 			if($.isFunction(callback)) callback(this);
 
+		},
+
+		start: function waterfall_start(options) {
+			var options = options || {};
+			
+			var xL = options.xL;
+			var xR = options.xR;
+			var xw = options.spacingx;
+			var yw = options.spacingy;
+
+			$.each($('.' + options.itemElementCls + ':not(.feedAbsActive)'), function(k, v){
+				$(v).addClass('feedAbsActive');
+
+				var vw = $(v).width();
+				var vh = $(v).height();
+
+				if(xL <= xR) {
+					$(v).css({'top': xL, 'left': 0});
+					xL = xL + vh + yw;
+				}else if(xL > xR){
+					$(v).css({'top': xR, 'left': vw + xw});
+					xR = xR + vh + yw;
+				}
+			});
+
+			if ($.isPlainObject(options)) {
+				this.options = $.extend(true, {}, this.options, options);
+			}
 		},
 
 		update: function waterfall_update(options) {
