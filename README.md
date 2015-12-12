@@ -10,6 +10,16 @@
 
 ## Options
 
+```
+$('#feed').waterfall({
+	parentElementCls: 'feed',
+	itemElementCls: 'feedItem',
+	spacingX: 100,
+	spacingY: 30
+});
+```
+
+## And Last
 
 If you interest about this plugin, maybe you can contact me to chat. Thanks for your support and response. :D
 
