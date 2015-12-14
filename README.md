@@ -14,9 +14,31 @@
 $('#feed').waterfall({
 	parentElementCls: 'feed',
 	itemElementCls: 'feedItem',
+	parentTimelineCls: 'feedbar',
+	timelineBarLineCls: 'barLine',
+	timelineBarCircleCls: 'barCircle',
 	spacingX: 100,
 	spacingY: 30
 });
+```
+
+## Example
+
+
+### HTML
+```
+
+<ul class="feed" id="feed">
+	<li class="feedItem"></li>
+	<li class="feedItem"></li>
+	<li class="feedItem"></li>
+</ul>
+
+<div class="feedbar" id="feedbar">
+	<div class="barLine"></div>
+	<div class="barCircle"></div>
+</div>
+
 ```
 
 ## And Last
