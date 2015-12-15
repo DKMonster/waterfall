@@ -1,7 +1,7 @@
 # WaterFall
 
 ###### Version: 0.1.0
-###### Update : 2015-12-09
+###### Update : 2015-12-15
 
 ## How To Use
 1. You need import jQuery. 
@@ -36,7 +36,7 @@ $('#feed').waterfall({
 
 <div class="feedbar" id="feedbar">
 	<div class="barLine"></div>
-	<div class="barCircle"></div>
+	<ul class="barCircle"></ul>
 </div>
 
 ```
