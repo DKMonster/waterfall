@@ -31,7 +31,7 @@
 		spacingX: 10,
 		spacingY: 10,
 		xL: 0,
-		xR: 0,
+		xR: 0
 	};
 
 	$.waterfall.prototype = {
@@ -49,6 +49,8 @@
 		start: function waterfall_start(options) {
 			var options = options || {};
 
+			var that = this;
+
 			var xL = options.xL;
 			var xR = options.xR;
 			var xw = options.spacingX;
@@ -62,9 +64,11 @@
 
 				if(xL <= xR) {
 					$(v).css({'top': xL, 'left': 0});
+					that.setPoint(options, (xL + (vh/2) + yw));
 					xL = xL + vh + yw;
 				}else if(xL > xR){
 					$(v).css({'top': xR, 'left': vw + xw});
+					that.setPoint(options, (xR + (vh/2) + yw));
 					xR = xR + vh + yw;
 				}
 			});
@@ -84,14 +88,28 @@
 			}
 		},
 
+		setPoint: function waterfall_setPoint(options, yh) {
+			var options = options || {};
+
+			$('<li class="circlePoint"></li>')
+				.appendTo('#' + this.options.timelineBarCircleCls)
+				.css({'top': yh});
+
+			if ($.isPlainObject(options)) {
+				this.options = $.extend(true, {}, this.options, options);
+			}
+		},
+
 		timeline: function waterfall_timeline(options, xL, xR) {
 			var options = options || {};
 
 			// setting the barLine height
 			if(xL >= xR) {
 				$('#' + this.options.timelineBarLineCls).css({height: (xL+20) + 'px'});
+				$('#' + this.options.timelineBarCircleCls).css({height: (xL+20) + 'px'});
 			}else{
 				$('#' + this.options.timelineBarLineCls).css({height: (xR+20) + 'px'});
+				$('#' + this.options.timelineBarCircleCls).css({height: (xR+20) + 'px'});
 			}
 
 
