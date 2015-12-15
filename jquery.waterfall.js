@@ -28,8 +28,8 @@
 	$.waterfall.defaults = {
 		parentElementCls: '',
 		itemElementCls: '',
-		spacingx: 10,
-		spacingy: 10,
+		spacingX: 10,
+		spacingY: 10,
 		xL: 0,
 		xR: 0,
 	};
@@ -48,11 +48,11 @@
 
 		start: function waterfall_start(options) {
 			var options = options || {};
-			
+
 			var xL = options.xL;
 			var xR = options.xR;
-			var xw = options.spacingx;
-			var yw = options.spacingy;
+			var xw = options.spacingX;
+			var yw = options.spacingY;
 
 			$.each($('.' + options.itemElementCls + ':not(.feedAbsActive)'), function(k, v){
 				$(v).addClass('feedAbsActive');
@@ -69,6 +69,8 @@
 				}
 			});
 
+			this.timeline(options, xL, xR);
+
 			if ($.isPlainObject(options)) {
 				this.options = $.extend(true, {}, this.options, options);
 			}
@@ -76,6 +78,22 @@
 
 		update: function waterfall_update(options) {
 			var options = options || {};
+
+			if ($.isPlainObject(options)) {
+				this.options = $.extend(true, {}, this.options, options);
+			}
+		},
+
+		timeline: function waterfall_timeline(options, xL, xR) {
+			var options = options || {};
+
+			// setting the barLine height
+			if(xL >= xR) {
+				$('#' + this.options.timelineBarLineCls).css({height: (xL+20) + 'px'});
+			}else{
+				$('#' + this.options.timelineBarLineCls).css({height: (xR+20) + 'px'});
+			}
+
 
 			if ($.isPlainObject(options)) {
 				this.options = $.extend(true, {}, this.options, options);
